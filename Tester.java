@@ -26,6 +26,7 @@ public class Tester {
     System.out.println(testLargest());
     System.out.println(testSumRows());
     System.out.println(testLargestInRows());
+    System.out.println(testSum2D());
   }
 
   public static boolean testSum() {
@@ -108,6 +109,27 @@ public class Tester {
       for (int j = 0; j < test.length; j++) {
         if (result[j] != arrayOps.largest(test[j])) return false;
       }
+    }
+
+    return true;
+  }
+
+  public static boolean testSum2D() {
+    int[][] testSeven = new int[0][0];
+
+    if (arrayOps.sum(testFive) != -8) return false;
+    if (arrayOps.sum(testSix) != 0) return false;
+    if (arrayOps.sum(testSeven) != 0) return false;
+
+    for (int i = 0; i < 100; i++) {
+      int[][] test = createNew2DArray();
+
+      int sum = 0;
+      for (int j = 0; j < test.length; j++) {
+        sum += arrayOps.sum(test[j]);
+      }
+
+      if (sum != arrayOps.sum(test)) return false;
     }
 
     return true;
