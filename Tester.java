@@ -5,6 +5,8 @@ import java.util.Arrays;
 public class Tester {
 
   public static ArrayOps arrayOps = new ArrayOps();
+  public static Random rng = new Random();
+
   public static int[] testOne = new int[] {
     1, 2, 3, 4
   };
@@ -41,6 +43,7 @@ public class Tester {
     System.out.println(testSum2D());
     System.out.println(testRowMagic());
     System.out.println(testColMagic());
+    System.out.println(testLocationMagic());
   }
 
   public static boolean testSum() {
@@ -219,9 +222,31 @@ public class Tester {
     return true;
   }
 
+  public static boolean testLocationMagic() {
+    int[][] testEleven = new int[][] {
+      {0, 2, 6, -5, 1},
+      {-16, 3, 9, 10, 1},
+      {20, 11, -888, -90, 0}
+    };
+
+    if (!arrayOps.isLocationMagic(testSix, 3, 2)) return false;
+    if (arrayOps.isLocationMagic(testEight, 0, 2)) return false;
+    if (arrayOps.isLocationMagic(testNine, 2, 2)) return false;
+    if (!arrayOps.isLocationMagic(testEleven, 0, 0)) return false;
+
+    for (int i = 0; i < 100; i++) {
+      int[][] test = createRectangle();
+      int row = rng.nextInt(test.length);
+      int col = rng.nextInt(test[0].length);
+      boolean result = (arrayOps.sumRows(test)[row] == arrayOps.sumCols(test)[col]);
+      if (result != arrayOps.isLocationMagic(test, row, col)) return false;
+    }
+
+    return true;
+  }
+
   public static int[] createNewArray() {
-    Random rng = new Random();
-    int[] newArray = new int[Math.abs(rng.nextInt(101)) + 1];
+    int[] newArray = new int[rng.nextInt(101) + 1];
 
     for (int i = 0; i < newArray.length; i++) {
       newArray[i] = rng.nextInt();
@@ -231,8 +256,7 @@ public class Tester {
   }
 
   public static int[][] createNew2DArray() {
-    Random rng = new Random();
-    int rows = Math.abs(rng.nextInt(101)) + 1;
+    int rows = rng.nextInt(101) + 1;
     int[][] toReturn = new int[rows][];
 
     for (int i = 0; i < rows; i++) {
@@ -243,9 +267,8 @@ public class Tester {
   }
 
   public static int[][] createRectangle() {
-    Random rng = new Random();
-    int rows = Math.abs(rng.nextInt(101)) + 1;
-    int cols = Math.abs(rng.nextInt(101)) + 1;
+    int rows = rng.nextInt(101) + 1;
+    int cols = rng.nextInt(101) + 1;
     int[][] toReturn = new int[rows][cols];
 
     for (int i = 0; i < rows; i++) {
