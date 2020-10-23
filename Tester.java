@@ -40,6 +40,7 @@ public class Tester {
     System.out.println(testLargestInRows());
     System.out.println(testSum2D());
     System.out.println(testRowMagic());
+    System.out.println(testColMagic());
   }
 
   public static boolean testSum() {
@@ -186,6 +187,33 @@ public class Tester {
       }
 
       if (magic != arrayOps.isRowMagic(test)) return false;
+    }
+
+    return true;
+  }
+
+  public static boolean testColMagic() {
+    int[][] testTen = new int[][] {
+      {2, 2, 40},
+      {10, 3, -44},
+      {-2, 5, 14}
+    };
+    if (!arrayOps.isColMagic(testSix)) return false;
+    if (!arrayOps.isColMagic(testSeven)) return false;
+    if (arrayOps.isColMagic(testEight)) return false;
+    if (arrayOps.isColMagic(testNine)) return false;
+    if (!arrayOps.isColMagic(testTen)) return false;
+
+    for (int i = 0; i < 100; i++) {
+      int[][] test = createRectangle();
+
+      int[] result = arrayOps.sumCols(test);
+      boolean magic = true;
+      for (int j = 0; j < result.length; j++) {
+        if (result[j] != result[0]) magic = false;
+      }
+
+      if (magic != arrayOps.isColMagic(test)) return false;
     }
 
     return true;
