@@ -52,14 +52,22 @@ public class ArrayOps {
   }
 
   public static boolean isRowMagic(int[][] matrix) {
+    int[] result = sumRows(matrix);
+    for (int i = 0; i < result.length; i++) {
+      if (result[i] != result[0]) return false;
+    }
     return true;
   }
 
   public static boolean isColMagic(int[][] matrix) {
+    int[] result = sumCols(matrix);
+    for (int i = 0; i < result.length; i++) {
+      if (result[i] != result[0]) return false;
+    }
     return true;
   }
 
-  public static boolean isLocationMagic(int[][] matrix) {
+  public static boolean isLocationMagic(int[][] matrix, int row, int col) {
     return true;
   }
 

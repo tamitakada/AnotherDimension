@@ -21,6 +21,17 @@ public class Tester {
     {-80}
   };
   public static int[][] testSix = new int[4][4];
+  public static int[][] testSeven = new int[0][0];
+  public static int[][] testEight = new int[][] {
+    {1, -2, 3, -5},
+    {-6, -33, 100, -4},
+    {3, -10, 0, 19}
+  };
+  public static int[][] testNine = new int[][] {
+    {1, 5, 3},
+    {3, -10, 16},
+    {9, 1000, -1000}
+  };
 
   public static void main(String[] args) {
     System.out.println(testSum());
@@ -28,6 +39,7 @@ public class Tester {
     System.out.println(testSumRows());
     System.out.println(testLargestInRows());
     System.out.println(testSum2D());
+    System.out.println(testRowMagic());
   }
 
   public static boolean testSum() {
@@ -116,8 +128,6 @@ public class Tester {
   }
 
   public static boolean testSum2D() {
-    int[][] testSeven = new int[0][0];
-
     if (arrayOps.sum(testFive) != -8) return false;
     if (arrayOps.sum(testSix) != 0) return false;
     if (arrayOps.sum(testSeven) != 0) return false;
@@ -137,12 +147,6 @@ public class Tester {
   }
 
   public static boolean testColSum() {
-    int[][] testEight = new int[][] {
-      {1, -2, 3, -5},
-      {-6, -33, 100, -4},
-      {3, -10, 0, 19}
-    };
-
     int[] result = arrayOps.sumCols(testFive);
     if (!(Arrays.toString(result).equals("[-2, -45, 103, 10]"))) return false;
     if (!(Arrays.toString(arrayOps.sumCols(testSix)).equals("[0, 0, 0, 0]"))) return false;
@@ -161,6 +165,27 @@ public class Tester {
       if (!(Arrays.toString(resultTwo).equals(
         Arrays.toString(arrayOps.sumCols(test))
       ))) return false;
+    }
+
+    return true;
+  }
+
+  public static boolean testRowMagic() {
+    if (!arrayOps.isRowMagic(testSix)) return false;
+    if (!arrayOps.isRowMagic(testSeven)) return false;
+    if (arrayOps.isRowMagic(testEight)) return false;
+    if (!arrayOps.isRowMagic(testNine)) return false;
+
+    for (int i = 0; i < 100; i++) {
+      int[][] test = createRectangle();
+
+      int[] result = arrayOps.sumRows(test);
+      boolean magic = true;
+      for (int j = 0; j < result.length; j++) {
+        if (result[j] != result[0]) magic = false;
+      }
+
+      if (magic != arrayOps.isRowMagic(test)) return false;
     }
 
     return true;
