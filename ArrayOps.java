@@ -40,4 +40,27 @@ public class ArrayOps {
       return sum;
   }
 
+  public static int[] sumCols(int[][] matrix) {
+    if (matrix.length == 0) return new int[0];
+    int[] sum = new int[matrix[0].length];
+    for (int i = 0; i < matrix.length; i++) {
+      for(int j = 0; j < matrix[i].length; j++) {
+        sum[j] = sum[j] + matrix[i][j];
+      }
+    }
+    return sum;
+  }
+
+  public static boolean isRowMagic(int[][] matrix) {
+    return true;
+  }
+
+  public static boolean isColMagic(int[][] matrix) {
+    return true;
+  }
+
+  public static boolean isLocationMagic(int[][] matrix) {
+    return true;
+  }
+
 }

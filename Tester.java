@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Arrays;
 
 
 public class Tester {
@@ -135,6 +136,36 @@ public class Tester {
     return true;
   }
 
+  public static boolean testColSum() {
+    int[][] testEight = new int[][] {
+      {1, -2, 3, -5},
+      {-6, -33, 100, -4},
+      {3, -10, 0, 19}
+    };
+
+    int[] result = arrayOps.sumCols(testFive);
+    if (!(Arrays.toString(result).equals("[-2, -45, 103, 10]"))) return false;
+    if (!(Arrays.toString(arrayOps.sumCols(testSix)).equals("[0, 0, 0, 0]"))) return false;
+
+    for (int i = 0; i < 100; i++) {
+      int[][] test = createRectangle();
+
+      int[] sum = new int[test[0].length];
+      for (int a = 0; a < test.length; a++) {
+        for(int j = 0; j < test[a].length; j++) {
+          sum[j] = sum[j] + test[a][j];
+        }
+      }
+
+      int[] resultTwo = arrayOps.sumCols(test);
+      if (!(Arrays.toString(resultTwo).equals(
+        Arrays.toString(arrayOps.sumCols(test))
+      ))) return false;
+    }
+
+    return true;
+  }
+
   public static int[] createNewArray() {
     Random rng = new Random();
     int[] newArray = new int[Math.abs(rng.nextInt(101)) + 1];
@@ -153,6 +184,25 @@ public class Tester {
 
     for (int i = 0; i < rows; i++) {
       toReturn[i] = createNewArray();
+    }
+
+    return toReturn;
+  }
+
+  public static int[][] createRectangle() {
+    Random rng = new Random();
+    int rows = Math.abs(rng.nextInt(101)) + 1;
+    int cols = Math.abs(rng.nextInt(101)) + 1;
+    int[][] toReturn = new int[rows][cols];
+
+    for (int i = 0; i < rows; i++) {
+      int[] newArray = new int[cols];
+
+      for (int j = 0; j < newArray.length; j++) {
+        newArray[j] = rng.nextInt();
+      }
+
+      toReturn[i] = newArray;
     }
 
     return toReturn;
